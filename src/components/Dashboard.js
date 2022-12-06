@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import avatar from "../media/avatar.png";
 import StudentEntry from "./StudentEntry";
 
 const Dashboard = () => {
+  const [studentsList, setStudentsList] = useState([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      const res = await fetch("http://localhost:5000/", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
+      console.log(data.data);
+      setStudentsList(data.data);
+    };
+    getData();
+  }, []);
+
   return (
     <div className="container">
       <div style={{ marginLeft: "-1000px" }}>
@@ -30,13 +47,15 @@ const Dashboard = () => {
           <tr>
             <th scope="col">#</th>
             <th scope="col">Student Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Age</th>
             <th scope="col">Edit</th>
             <th scope="col">Mark Attandance</th>
             <th scope="col">Remove</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
+          {/* <tr>
             <th scope="row">1</th>
             <td>Mark</td>
             <td>
@@ -48,7 +67,26 @@ const Dashboard = () => {
             <td>
               <i class="fa-solid fa-trash"></i>
             </td>
-          </tr>
+          </tr> */}
+          {studentsList.map((object) => {
+            return (
+              <tr key={object._id}>
+                <th scope="row">1</th>
+                <td>{object.firstname}</td>
+                <td>{object.email}</td>
+                <td>{object.age}</td>
+                <td>
+                  <i class="fa-solid fa-user-pen" />
+                </td>
+                <td>
+                  <input type="checkbox" />
+                </td>
+                <td>
+                  <i class="fa-solid fa-trash"></i>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>

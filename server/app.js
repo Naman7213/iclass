@@ -1,20 +1,23 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
+const cors = require("cors");
 require("./DB/conn");
-const Admin = require("./model/adminSchema");
+const Student = require("./model/studentSchema");
+
+app.use(cors());
 
 app.get("/", async (req, res) => {
   try {
-    Admin.find()
+    Student.find()
       .then((data) => {
-        res.status(200).json({ data });
+        return res.status(200).json({ data });
       })
       .catch((err) => {
-        res.status(500).json({ err });
+        return res.status(500).json({ err });
       });
   } catch {
-    res.status(200).json({ message: "error" });
+    return res.status(200).json({ message: "error" });
   }
 });
 
