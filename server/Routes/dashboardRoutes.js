@@ -48,4 +48,49 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.patch("/", (req, res) => {
+  const { firstname, regno, age } = req.body;
+  Student.find({ regno: regno })
+    .then((result) => {
+      if (result.length === 0) {
+        return res.status(400).json({
+          message: "Regno did not match, try again",
+        });
+      } else {
+        const updatedStudent = {
+          _id: result[0]._id,
+          firstname: firstname,
+          age: age,
+        };
+        Student.findByIdAndUpdate(result[0]._id, updatedStudent)
+          .then((result) =>
+            res
+              .status(200)
+              .json({ message: "Details Changed", updatedUser: result })
+          )
+          .catch((err) =>
+            res
+              .status(500)
+              .json({ message: "Server Encountered an Error", error: err })
+          );
+      }
+    })
+    .catch((err) =>
+      res
+        .status(500)
+        .json({ message: "Server Encountered an Error", error: err })
+    );
+});
+
+router.delete("/", (req, res) => {
+  const { regno } = req.body;
+  Student.deleteOne({ regno: regno })
+    .then(() => {
+      res.status(200).json({ message: "Student Entry Deleted Successfully" });
+    })
+    .catch(() => {
+      res.status(500).json({ message: "Server error, please try again" });
+    });
+});
+
 module.exports = router;
