@@ -3,22 +3,14 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 require("./DB/conn");
-const Student = require("./model/studentSchema");
+const dashboardRoutes = require("./Routes/dashboardRoutes");
+const bodyParser = require("body-parser");
 
 app.use(cors());
 
-app.get("/", async (req, res) => {
-  try {
-    Student.find()
-      .then((data) => {
-        return res.status(200).json({ data });
-      })
-      .catch((err) => {
-        return res.status(500).json({ err });
-      });
-  } catch {
-    return res.status(200).json({ message: "error" });
-  }
-});
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.use("/dashboard", dashboardRoutes);
 
 module.exports = app;

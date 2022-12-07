@@ -1,11 +1,29 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 
 const StudentEntry = () => {
-    const [firstName,setFirstName] = useState();
-    const [lastName,setLastName] = useState();
-    const [email,setEmail] = useState();
-    const [password,setPassword] = useState();
-    const [age,setAge] = useState();
+  const [firstname, setFirstName] = useState();
+  const [lastname, setLastName] = useState();
+  const [email, setEmail] = useState();
+  const [regno, setRegNo] = useState();
+  const [age, setAge] = useState();
+
+  const addStudent = async (e) => {
+    e.preventDefault();
+    const res = await fetch("http://localhost:5000/dashboard", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ firstname, lastname, email, regno, age }),
+    });
+    if (res.status === 500 || !res) {
+      window.alert("Registeration Failed");
+    } else if (res.status === 409) {
+      window.alert("Student regno already exists");
+    } else if (res.status === 201) {
+      window.alert("Student Created");
+    }
+  };
   return (
     <div>
       <div
@@ -38,8 +56,9 @@ const StudentEntry = () => {
                     type="text"
                     class="form-control"
                     id="exampleInputPassword1"
-                    value={firstName}
-                    onChange={(e)=>setFirstName(e.target.value)}
+                    value={firstname}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    required
                   />
                 </div>
                 <div class="mb-3">
@@ -50,8 +69,9 @@ const StudentEntry = () => {
                     type="text"
                     class="form-control"
                     id="exampleInputPassword1"
-                    value={lastName}
-                    onChange={(e)=>setLastName(e.target.value)}
+                    value={lastname}
+                    onChange={(e) => setLastName(e.target.value)}
+                    required
                   />
                 </div>
                 <div class="mb-3">
@@ -64,7 +84,8 @@ const StudentEntry = () => {
                     id="exampleInputEmail1"
                     aria-describedby="emailHelp"
                     value={email}
-                    onChange={(e)=>setEmail(e.target.value)}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
                   />
                   <div id="emailHelp" class="form-text">
                     We'll never share your email with anyone else.
@@ -72,14 +93,15 @@ const StudentEntry = () => {
                 </div>
                 <div class="mb-3">
                   <label for="exampleInputPassword1" class="form-label">
-                    Password
+                    regno
                   </label>
                   <input
-                    type="password"
+                    type="text"
                     class="form-control"
                     id="exampleInputPassword1"
-                    value={password}
-                    onChange={(e)=>setPassword(e.target.value)}
+                    value={regno}
+                    onChange={(e) => setRegNo(e.target.value)}
+                    required
                   />
                 </div>
                 <div class="mb-3">
@@ -91,10 +113,15 @@ const StudentEntry = () => {
                     class="form-control"
                     id="exampleInputPassword1"
                     value={age}
-                    onChange={(e)=>setAge(e.target.value)}
+                    onChange={(e) => setAge(e.target.value)}
+                    required
                   />
                 </div>
-                <button type="submit" class="btn btn-primary">
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  onClick={addStudent}
+                >
                   Submit
                 </button>
               </form>

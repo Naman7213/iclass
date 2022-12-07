@@ -7,7 +7,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     const getData = async () => {
-      const res = await fetch("http://localhost:5000/", {
+      const res = await fetch("http://localhost:5000/dashboard", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -19,6 +19,7 @@ const Dashboard = () => {
     };
     getData();
   }, []);
+
 
   return (
     <div className="container">
@@ -55,19 +56,6 @@ const Dashboard = () => {
           </tr>
         </thead>
         <tbody>
-          {/* <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>
-              <i class="fa-solid fa-user-pen" />
-            </td>
-            <td>
-              <input type="checkbox" />
-            </td>
-            <td>
-              <i class="fa-solid fa-trash"></i>
-            </td>
-          </tr> */}
           {studentsList.map((object) => {
             return (
               <tr key={object._id}>

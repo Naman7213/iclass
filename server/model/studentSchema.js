@@ -5,8 +5,8 @@ const student_schema = new mongoose.Schema({
   firstname: mongoose.Schema.Types.String,
   lastname: mongoose.Schema.Types.String,
   email: mongoose.Schema.Types.String,
-  regno: mongoose.Schema.Types.String,
-  age: mongoose.Schema.Types.String,
+  regno: mongoose.Schema.Types.Number,
+  age: mongoose.Schema.Types.Number,
 });
 
 const Student = mongoose.model("Students", student_schema);
