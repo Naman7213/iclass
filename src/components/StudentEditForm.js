@@ -7,7 +7,7 @@ const StudentEditForm = () => {
 
   const editStudent = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:5000/dashboard", {
+    const res = await fetch("http://localhost:5000/student", {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

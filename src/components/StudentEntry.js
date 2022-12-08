@@ -9,7 +9,7 @@ const StudentEntry = () => {
 
   const addStudent = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:5000/dashboard", {
+    const res = await fetch("http://localhost:5000/student", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

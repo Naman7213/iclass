@@ -1,14 +1,19 @@
 import './App.css';
 import Navbar from './components/Navbar';
-// import AdminLogin from './components/AdminLogin';
+import AdminLogin from './components/AdminLogin';
 import Dashboard from './components/Dashboard';
+import { Routes,Route } from 'react-router-dom';
 
 function App() {
   return (
     <div className="App">
       <Navbar/>
       {/* <AdminLogin/> */}
-      <Dashboard/>
+      {/* <Dashboard/> */}
+      <Routes>
+        <Route path='/' element={<AdminLogin/>}/>
+        <Route path='/dashboard' element={<Dashboard/>}/>
+      </Routes>
     </div>
   );
 }

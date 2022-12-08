@@ -6,7 +6,7 @@ const admin_schema = new mongoose.Schema({
   lastname: mongoose.Schema.Types.String,
   email: mongoose.Schema.Types.String,
   password: mongoose.Schema.Types.String,
-  age: mongoose.Schema.Types.String,
+  age: mongoose.Schema.Types.Number,
 });
 
 

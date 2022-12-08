@@ -5,25 +5,39 @@ import StudentEditForm from "./StudentEditForm";
 
 const Dashboard = () => {
   const [studentsList, setStudentsList] = useState([]);
+  const [adminDetails, setAdminDetails] = useState([]);
 
   useEffect(() => {
-    const getData = async () => {
-      const res = await fetch("http://localhost:5000/dashboard", {
+    const getStudentData = async () => {
+      const res = await fetch("http://localhost:5000/student", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
       });
       const data = await res.json();
-      console.log(data.data);
       setStudentsList(data.data);
     };
-    getData();
+    getStudentData();
+  }, []);
+
+  useEffect(() => {
+    const getAdminData = async () => {
+      const res = await fetch("http://localhost:5000/admin", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
+      setAdminDetails(data.data);
+    };
+    getAdminData();
   }, []);
 
   const deleteStudent = async (e, regno) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:5000/dashboard", {
+    const res = await fetch("http://localhost:5000/student", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -45,7 +59,9 @@ const Dashboard = () => {
           alt="admin profile"
           style={{ height: "100px", width: "100px" }}
         />
-        <p>Admin Name</p>
+        <p>
+          {adminDetails.length === 0 ? "Admin Name" : adminDetails[0].firstname+" "+adminDetails[0].lastname}
+        </p>
       </div>
 
       <StudentEntry />
