@@ -34,6 +34,48 @@ router.post("/login", async (req, res) => {
   }
 });
 
+router.patch("/markpresent", async (req, res) => {
+  const regno = req.body.regno;
+  const findStudent = await Student.findOne({ regno: regno });
+  if (findStudent) {
+    const updateStudent = {
+      _id: findStudent._id,
+      presentDays: ++findStudent.presentDays,
+    };
+    Student.findByIdAndUpdate(findStudent._id, updateStudent)
+      .then((result) => {
+        res
+          .status(200)
+          .json({ message: "Details Changed", updatedStudent: result });
+      })
+      .catch(() => {
+        return res
+          .status(500)
+          .json({ message: "Server error, please try again" });
+      });
+  }
+});
 
+router.patch("/markabsent", async (req, res) => {
+  const regno = req.body.regno;
+  const findStudent = await Student.findOne({ regno: regno });
+  if (findStudent) {
+    const updateStudent = {
+      _id: findStudent._id,
+      absentDays: ++findStudent.absentDays,
+    };
+    Student.findByIdAndUpdate(findStudent._id, updateStudent)
+      .then((result) => {
+        res
+          .status(200)
+          .json({ message: "Details Changed", updatedStudent: result });
+      })
+      .catch(() => {
+        return res
+          .status(500)
+          .json({ message: "Server error, please try again" });
+      });
+  }
+});
 
 module.exports = router;

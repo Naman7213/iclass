@@ -12,7 +12,11 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+app.get("/", (req, res) => {
+  res.status(200).json({ message: "You are requestion / route" });
+});
+
 app.use("/student", studentRoutes);
-app.use("/admin",adminRoutes);
+app.use("/admin", adminRoutes);
 
 module.exports = app;

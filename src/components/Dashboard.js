@@ -51,7 +51,35 @@ const Dashboard = () => {
     }
   };
 
-  
+  const present = async (regno) => {
+    const res = await fetch("http://localhost:5000/admin/markpresent", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ regno }),
+    });
+    if (res.status === 200) {
+      window.alert("Present Marked");
+    } else {
+      window.alert("Please Mark again");
+    }
+  };
+
+  const absent = async (regno) => {
+    const res = await fetch("http://localhost:5000/admin/markabsent", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ regno }),
+    });
+    if (res.status === 200) {
+      window.alert("Absent Marked");
+    } else {
+      window.alert("Please Mark again");
+    }
+  };
 
   return (
     <div className="container">
@@ -108,7 +136,19 @@ const Dashboard = () => {
                   />
                 </td>
                 <td>
-                  <input type="checkbox" />
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => present(object.regno)}
+                  >
+                    P
+                  </button>
+                  &nbsp;
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => absent(object.regno)}
+                  >
+                    A
+                  </button>
                 </td>
                 <td>
                   <i
@@ -121,9 +161,7 @@ const Dashboard = () => {
           })}
         </tbody>
       </table>
-      <button className="btn btn-success">
-        Save
-      </button>
+      <button className="btn btn-success">Save</button>
     </div>
   );
 };
