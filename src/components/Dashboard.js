@@ -51,6 +51,8 @@ const Dashboard = () => {
     }
   };
 
+  
+
   return (
     <div className="container">
       <div style={{ marginLeft: "-1000px" }}>
@@ -60,7 +62,9 @@ const Dashboard = () => {
           style={{ height: "100px", width: "100px" }}
         />
         <p>
-          {adminDetails.length === 0 ? "Admin Name" : adminDetails[0].firstname+" "+adminDetails[0].lastname}
+          {adminDetails.length === 0
+            ? "Admin Name"
+            : adminDetails[0].firstname + " " + adminDetails[0].lastname}
         </p>
       </div>
 
@@ -117,6 +121,9 @@ const Dashboard = () => {
           })}
         </tbody>
       </table>
+      <button className="btn btn-success">
+        Save
+      </button>
     </div>
   );
 };

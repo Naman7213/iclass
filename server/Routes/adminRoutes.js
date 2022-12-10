@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Admin = require("../model/adminSchema");
+const Student = require("../model/studentSchema");
 
 router.get("/", (req, res) => {
   Admin.find()
@@ -32,5 +33,7 @@ router.post("/login", async (req, res) => {
     return res.status(500).json({ error });
   }
 });
+
+
 
 module.exports = router;
