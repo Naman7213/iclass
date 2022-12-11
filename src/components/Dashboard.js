@@ -46,6 +46,7 @@ const Dashboard = () => {
     });
     if (res.status === 200) {
       window.alert("Student Entry Deleted Successfully");
+      window.location.reload();
     } else if (res.status === 500) {
       window.alert("Server error, please try again");
     }

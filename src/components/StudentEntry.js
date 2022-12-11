@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 const StudentEntry = () => {
-  const navigate = useNavigate();
   const [firstname, setFirstName] = useState();
   const [lastname, setLastName] = useState();
   const [email, setEmail] = useState();
@@ -24,7 +22,7 @@ const StudentEntry = () => {
       window.alert("Student regno already exists");
     } else if (res.status === 201) {
       window.alert("Student Created");
-      navigate("/dashboard");
+      window.location.reload();
     }
   };
   return (

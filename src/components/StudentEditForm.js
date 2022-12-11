@@ -16,6 +16,7 @@ const StudentEditForm = () => {
     });
     if (res.status === 200) {
       window.alert("Student Entry Edited");
+      window.location.reload();
     } else if (res.status === 500) {
       window.alert("Server Error, Do the operation again");
     }
