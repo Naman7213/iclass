@@ -3,25 +3,26 @@ import { useNavigate } from "react-router-dom";
 
 const AdminLogin = () => {
   const navigate = useNavigate();
-  const[email,setEmail] = useState("");
-  const[password,setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const loginAdmin = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:5000/admin/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
-    if(res.status===200){
+    const res = await fetch(
+      "https://iclassserver-production.up.railway.app/admin/login",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      }
+    );
+    if (res.status === 200) {
       window.alert("Login Successful");
       navigate("/dashboard");
-    }
-    else if(res.status===401){
+    } else if (res.status === 401) {
       window.alert("Admin Not Found");
-    }
-    else if(res.status===500){
+    } else if (res.status === 500) {
       window.alert("Please Try again");
     }
   };
@@ -75,8 +76,7 @@ const AdminLogin = () => {
                     class="form-control form-control-lg"
                     placeholder="Enter a valid email address"
                     value={email}
-                    onChange={(e)=>setEmail(e.target.value)}
-
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                   <label class="form-label" for="form3Example3">
                     Email address
@@ -91,7 +91,7 @@ const AdminLogin = () => {
                     class="form-control form-control-lg"
                     placeholder="Enter password"
                     value={password}
-                    onChange={(e)=>setPassword(e.target.value)}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                   <label class="form-label" for="form3Example4">
                     Password

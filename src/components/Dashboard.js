@@ -9,12 +9,15 @@ const Dashboard = () => {
 
   useEffect(() => {
     const getStudentData = async () => {
-      const res = await fetch("http://localhost:5000/student", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const res = await fetch(
+        "https://iclassserver-production.up.railway.app/student",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       const data = await res.json();
       setStudentsList(data.data);
     };
@@ -23,12 +26,15 @@ const Dashboard = () => {
 
   useEffect(() => {
     const getAdminData = async () => {
-      const res = await fetch("http://localhost:5000/admin", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const res = await fetch(
+        "https://iclassserver-production.up.railway.app/admin",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       const data = await res.json();
       setAdminDetails(data.data);
     };
@@ -37,13 +43,16 @@ const Dashboard = () => {
 
   const deleteStudent = async (e, regno) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:5000/student", {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ regno: regno }),
-    });
+    const res = await fetch(
+      "https://iclassserver-production.up.railway.app/student",
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ regno: regno }),
+      }
+    );
     if (res.status === 200) {
       window.alert("Student Entry Deleted Successfully");
       window.location.reload();
@@ -53,13 +62,16 @@ const Dashboard = () => {
   };
 
   const present = async (regno) => {
-    const res = await fetch("http://localhost:5000/admin/markpresent", {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ regno }),
-    });
+    const res = await fetch(
+      "https://iclassserver-production.up.railway.app/admin/markpresent",
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ regno }),
+      }
+    );
     if (res.status === 200) {
       window.alert("Present Marked");
     } else {
@@ -68,13 +80,16 @@ const Dashboard = () => {
   };
 
   const absent = async (regno) => {
-    const res = await fetch("http://localhost:5000/admin/markabsent", {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ regno }),
-    });
+    const res = await fetch(
+      "https://iclassserver-production.up.railway.app/admin/markabsent",
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ regno }),
+      }
+    );
     if (res.status === 200) {
       window.alert("Absent Marked");
     } else {
