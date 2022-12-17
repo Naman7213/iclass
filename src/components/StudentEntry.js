@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const StudentEntry = () => {
   const [firstname, setFirstName] = useState();
@@ -24,12 +26,16 @@ const StudentEntry = () => {
     } else if (res.status === 409) {
       window.alert("Student regno already exists");
     } else if (res.status === 201) {
-      window.alert("Student Created");
-      window.location.reload();
+      (function () {
+        toast.success("Student Entry Added, Please refresh the page !", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      })();
     }
   };
   return (
     <div>
+      <ToastContainer />
       <div
         class="modal fade"
         id="exampleModal"

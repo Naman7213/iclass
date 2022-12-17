@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import avatar from "../media/avatar.png";
 import StudentEntry from "./StudentEntry";
 import StudentEditForm from "./StudentEditForm";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Dashboard = () => {
   const [studentsList, setStudentsList] = useState([]);
@@ -54,8 +56,11 @@ const Dashboard = () => {
       }
     );
     if (res.status === 200) {
-      window.alert("Student Entry Deleted Successfully");
-      window.location.reload();
+      (function () {
+        toast.success("Student Entry Deleted, Please refresh the page !", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      })();
     } else if (res.status === 500) {
       window.alert("Server error, please try again");
     }
@@ -73,7 +78,11 @@ const Dashboard = () => {
       }
     );
     if (res.status === 200) {
-      window.alert("Present Marked");
+      (function () {
+        toast.success("Student Marked Present", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      })();
     } else {
       window.alert("Please Mark again");
     }
@@ -91,7 +100,11 @@ const Dashboard = () => {
       }
     );
     if (res.status === 200) {
-      window.alert("Absent Marked");
+      (function () {
+        toast.success("Student Marked Absent", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      })();
     } else {
       window.alert("Please Mark again");
     }
@@ -99,6 +112,7 @@ const Dashboard = () => {
 
   return (
     <div className="container">
+      <ToastContainer />
       <div style={{ marginLeft: "-1000px" }}>
         <img
           src={avatar}

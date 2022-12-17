@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const StudentEditForm = () => {
   const [firstname, setFirstName] = useState("");
@@ -18,7 +20,11 @@ const StudentEditForm = () => {
       }
     );
     if (res.status === 200) {
-      window.alert("Student Entry Edited");
+      (function () {
+        toast.success("Student Entry Edited, Please refresh the page !", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      })();
       window.location.reload();
     } else if (res.status === 500) {
       window.alert("Server Error, Do the operation again");
@@ -26,6 +32,7 @@ const StudentEditForm = () => {
   };
   return (
     <div>
+      <ToastContainer />
       <div
         class="modal fade"
         id="exampleModal1"
