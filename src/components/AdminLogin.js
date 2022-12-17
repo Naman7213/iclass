@@ -20,6 +20,8 @@ const AdminLogin = () => {
     if (res.status === 200) {
       window.alert("Login Successful");
       navigate("/dashboard");
+    } else if (res.status === 400) {
+      window.alert("Details Incorrect");
     } else if (res.status === 401) {
       window.alert("Admin Not Found");
     } else if (res.status === 500) {
