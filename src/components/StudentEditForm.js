@@ -9,16 +9,13 @@ const StudentEditForm = () => {
 
   const editStudent = async (e) => {
     e.preventDefault();
-    const res = await fetch(
-      "https://iclassserver-production.up.railway.app/student",
-      {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ firstname, regno, age }),
-      }
-    );
+    const res = await fetch("http://localhost:5000/student", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ firstname, regno, age }),
+    });
     if (res.status === 200) {
       (function () {
         toast.success("Student Entry Edited, Please refresh the page !", {

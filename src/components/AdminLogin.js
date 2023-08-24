@@ -7,16 +7,13 @@ const AdminLogin = () => {
   const [password, setPassword] = useState("");
   const loginAdmin = async (e) => {
     e.preventDefault();
-    const res = await fetch(
-      "https://iclassserver-production.up.railway.app/admin/login",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      }
-    );
+    const res = await fetch("http://localhost:5000/admin/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
     if (res.status === 200) {
       window.alert("Login Successful");
       navigate("/dashboard");

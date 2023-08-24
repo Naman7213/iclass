@@ -11,16 +11,13 @@ const StudentEntry = () => {
 
   const addStudent = async (e) => {
     e.preventDefault();
-    const res = await fetch(
-      "https://iclassserver-production.up.railway.app/student",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ firstname, lastname, email, regno, age }),
-      }
-    );
+    const res = await fetch("http://localhost:5000/student", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ firstname, lastname, email, regno, age }),
+    });
     if (res.status === 500 || !res) {
       window.alert("Registeration Failed");
     } else if (res.status === 409) {

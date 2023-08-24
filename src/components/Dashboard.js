@@ -12,7 +12,7 @@ const Dashboard = () => {
   useEffect(() => {
     const getStudentData = async () => {
       const res = await fetch(
-        "https://iclassserver-production.up.railway.app/student",
+        "http://localhost:5000/student",
         {
           method: "GET",
           headers: {
@@ -29,7 +29,7 @@ const Dashboard = () => {
   useEffect(() => {
     const getAdminData = async () => {
       const res = await fetch(
-        "https://iclassserver-production.up.railway.app/admin",
+        "http://localhost:5000/admin",
         {
           method: "GET",
           headers: {
@@ -46,7 +46,7 @@ const Dashboard = () => {
   const deleteStudent = async (e, regno) => {
     e.preventDefault();
     const res = await fetch(
-      "https://iclassserver-production.up.railway.app/student",
+      "http://localhost:5000/student",
       {
         method: "DELETE",
         headers: {
@@ -68,7 +68,7 @@ const Dashboard = () => {
 
   const present = async (regno) => {
     const res = await fetch(
-      "https://iclassserver-production.up.railway.app/admin/markpresent",
+      "http://localhost:5000/admin/markpresent",
       {
         method: "PATCH",
         headers: {
@@ -90,7 +90,7 @@ const Dashboard = () => {
 
   const absent = async (regno) => {
     const res = await fetch(
-      "https://iclassserver-production.up.railway.app/admin/markabsent",
+      "http://localhost:5000/admin/markabsent",
       {
         method: "PATCH",
         headers: {
